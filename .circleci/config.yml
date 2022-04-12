@@ -49,36 +49,9 @@ jobs:
 
     
   deploy:
-    parameters:
-      GCLOUD_SERVICE_KEY:
-         default: GCLOUD_SERVICE_KEY
-         description: The gcloud service key
-         type: env_var_name
-      google_compute_region:
-         default: google_compute_region
-         description: The gcloud compute region
-         type: env_var_name
-      GOOGLE_COMPUTE_ZONE:
-         default: GOOGLE_COMPUTE_ZONE
-         description: The gcloud compute zone
-         type: env_var_name
-      google-project-id:
-         default: GOOGLE_PROJECT_ID
-         description: The gcloud project id
-         type: env_var_name
-      
     description: Deploy application to Google Kubernetes Engine
     machine: true
     steps:
-      # Install `gcloud` and `kubectl` if not already installed.
-      #- gke/install
-      # Initialize the `gcloud` CLI.
-#       - gcloud/initialize:
-#           gcloud-service-key: <<parameters.GCLOUD_SERVICE_KEY>>
-#           google-compute-region: <<parameters.google_compute_region>>
-#           google-compute-zone: <<parameters.GOOGLE_COMPUTE_ZONE>>
-#           google-project-id: <<parameters.google-project-id>>
-      #-  gke/init
       - gke/install
       # Update a deployment's Docker image.
       - gke/publish-and-rollout-image:
