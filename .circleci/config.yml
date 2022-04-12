@@ -2,7 +2,7 @@ version: 2.1
 
 orbs:
   node: circleci/node@1.0.1
-  gcp-gke: circleci/gcp-gke@0.1.0
+  gcp-gke: circleci/gcp-gke@1.4.0
   gcp-gcr: circleci/gcp-gcr@0.15.0
 
 jobs:
@@ -36,12 +36,12 @@ jobs:
           image: nginx
           no_output_timeout: 20m
           registry-url: gcr.io
-          tag: "v2"
+          tag: $CIRCLE_SHA1
       - gcp-gcr/push-image:
           digest-path: /tmp/digest.txt
           image: nginx
           registry-url: gcr.io
-          tag: "v2"
+          tag: $CIRCLE_SHA1
       - run:
           command: |
             echo "Digest is: $(</tmp/digest.txt)"
@@ -56,10 +56,12 @@ jobs:
       # Initialize the `gcloud` CLI.
       - gcp-gke/init
       # Update a deployment's Docker image.
-      - gcp-gke/rollout-image:
-          deployment: circle-ci-cluster
+      - gke/publish-and-rollout-image:
+          cluster: k8s-circle
           container: dominic-backend
-          image: gcr.io/neon-particle-345710/nginx:v2
+          deployment: circle-ci-cluster
+          image: gcr.io/neon-particle-345710/nginx
+          tag: $CIRCLE_SHA1
 
 workflows:
   build_update_deploy:
