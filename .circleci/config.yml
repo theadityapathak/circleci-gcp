@@ -36,12 +36,12 @@ jobs:
           image: nginx
           no_output_timeout: 20m
           registry-url: gcr.io
-          target-tag: "v2"
+          tag: "v2"
       - gcp-gcr/push-image:
           digest-path: /tmp/digest.txt
           image: nginx
           registry-url: gcr.io
-          target-tag: "v2"
+          tag: "v2"
       - run:
           command: |
             echo "Digest is: $(</tmp/digest.txt)"
