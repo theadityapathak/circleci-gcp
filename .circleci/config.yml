@@ -54,6 +54,7 @@ jobs:
     steps:
       - gke/install
       # Update a deployment's Docker image.
+      - gke/update-kubeconfig-with-credentials
       - gke/rollout-image:
           cluster: k8s-circle
           container: dominic-backend
