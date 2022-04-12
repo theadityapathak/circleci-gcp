@@ -59,7 +59,7 @@ jobs:
           perform-login: true
           
       - gke/rollout-image:
-          cluster: k8s-circle
+          cluster: cluster-1
           container: dominic-backend
           deployment: circle-ci-cluster
           image: gcr.io/neon-particle-345710/nginx
