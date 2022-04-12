@@ -31,15 +31,6 @@ jobs:
     machine: true
     steps:
       - checkout
-      - gcr/gcr-auth
-      - gcr/build-image:
-          image: circle-gke
-          tag: "v2"
-      - gcr/push-image:
-          image: circle-gke
-          tag: "v2"
-          
-      - checkout
       - gcp-gcr/gcr-auth
       - gcp-gcr/build-image:
           image: nginx
