@@ -55,7 +55,7 @@ jobs:
       - gke/install
       # Update a deployment's Docker image.
       - gke/update-kubeconfig-with-credentials:
-          cluster: k8s-circle
+          cluster: cluster-1
           perform-login: true
           
       - gke/rollout-image:
