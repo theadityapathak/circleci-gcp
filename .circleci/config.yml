@@ -71,15 +71,16 @@ jobs:
     machine: true
     steps:
       # Install `gcloud` and `kubectl` if not already installed.
-      - gke/install
+      #- gke/install
       # Initialize the `gcloud` CLI.
 #       - gcloud/initialize:
 #           gcloud-service-key: <<parameters.GCLOUD_SERVICE_KEY>>
 #           google-compute-region: <<parameters.google_compute_region>>
 #           google-compute-zone: <<parameters.GOOGLE_COMPUTE_ZONE>>
 #           google-project-id: <<parameters.google-project-id>>
-      -  gke/init
-      
+      #-  gke/init
+
+      - k8s/install-kubectl
       # Update a deployment's Docker image.
       - gke/publish-and-rollout-image:
           cluster: k8s-circle
