@@ -79,8 +79,7 @@ jobs:
 #           google-compute-zone: <<parameters.GOOGLE_COMPUTE_ZONE>>
 #           google-project-id: <<parameters.google-project-id>>
       #-  gke/init
-
-      - k8s/install-kubectl
+      - gke/install
       # Update a deployment's Docker image.
       - gke/publish-and-rollout-image:
           cluster: k8s-circle
