@@ -3,7 +3,7 @@ version: 2.1
 orbs:
   node: circleci/node@1.0.1
   gcp-gke: circleci/gcp-gke@0.1.0
-  gcr: circleci/gcp-gcr@0.0.2
+  gcp-gcr: circleci/gcp-gcr@0.15.0
 
 jobs:
   build:
@@ -38,6 +38,22 @@ jobs:
       - gcr/push-image:
           image: circle-gke
           tag: "v2"
+          
+      - checkout
+      - gcp-gcr/gcr-auth
+      - gcp-gcr/build-image:
+          image: nginx
+          no_output_timeout: 20m
+          registry-url: gcr.io
+          target-tag: "v2"
+      - gcp-gcr/push-image:
+          digest-path: /tmp/digest.txt
+          image: nginx
+          registry-url: gcr.io
+          target-tag: "v2"
+      - run:
+          command: |
+            echo "Digest is: $(</tmp/digest.txt)"
 
     
   deploy:
