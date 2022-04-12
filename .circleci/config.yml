@@ -52,9 +52,9 @@ jobs:
     machine: true
     steps:
       # Install `gcloud` and `kubectl` if not already installed.
-      - gcp-gke/install
+      - gke/install
       # Initialize the `gcloud` CLI.
-      - gcp-gke/init
+      - gke/init
       # Update a deployment's Docker image.
       - gke/publish-and-rollout-image:
           cluster: k8s-circle
