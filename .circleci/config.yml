@@ -57,7 +57,7 @@ jobs:
       - gcp-gke/init
       # Update a deployment's Docker image.
       - gcp-gke/rollout-image:
-          deployment: k8s-circle
+          deployment: circle-ci-cluster
           container: dominic-backend
           image: gcr.io/neon-particle-345710/nginx:v2
 
