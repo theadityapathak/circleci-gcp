@@ -81,7 +81,7 @@ jobs:
       -  gke/init
       
       # Update a deployment's Docker image.
-      - gcp-gke/publish-and-rollout-image:
+      - gke/publish-and-rollout-image:
           cluster: k8s-circle
           container: dominic-backend
           deployment: circle-ci-cluster
